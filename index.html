@@ -301,6 +301,94 @@ textarea.fc{resize:vertical;min-height:80px}
 .dv-word-fallback h3{font-size:16px;color:var(--text);margin-bottom:8px}
 .dv-word-fallback p{font-size:13px;margin-bottom:20px}
 
+
+/* ── GANTT LIST TABLE ── */
+.g-legend-btn{font-family:var(--font);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;
+  cursor:pointer;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:var(--muted);transition:all .15s;}
+.g-legend-btn:hover,.g-legend-btn.active{border-color:var(--accent);color:var(--text);background:rgba(0,194,255,.1);}
+.g-list-table{width:100%;border-collapse:collapse;font-family:var(--font);}
+.g-list-row{cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(255,255,255,.05);}
+.g-list-row:hover{background:rgba(0,194,255,.06);}
+.g-list-row td{padding:11px 16px;vertical-align:middle;font-size:13px;}
+.g-phase-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;font-family:var(--font);
+  padding:3px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);
+  color:var(--text);white-space:nowrap;}
+.g-ms-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-family:var(--font);font-weight:500;
+  padding:2px 7px;border-radius:4px;margin:1px 2px;white-space:nowrap;border:1px solid transparent;}
+.g-ms-pill.done{background:rgba(110,231,183,.12);border-color:rgba(110,231,183,.3);color:#6ee7b7;}
+.g-ms-pill.ok{background:rgba(0,194,255,.1);border-color:rgba(0,194,255,.25);color:var(--accent);}
+.g-ms-pill.warn{background:rgba(255,179,71,.12);border-color:rgba(255,179,71,.3);color:var(--warn);}
+.g-ms-pill.over{background:rgba(255,79,79,.12);border-color:rgba(255,79,79,.3);color:var(--danger);}
+.g-ms-pill.future{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);color:var(--muted);}
+
+/* ── GANTT FULLSCREEN MODAL ── */
+#ganttModal{position:fixed;inset:0;z-index:900;background:rgba(6,14,24,.95);backdrop-filter:blur(10px);
+  display:none;flex-direction:column;font-family:var(--font);}
+#ganttModal.open{display:flex;}
+.gm-hdr{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--navy2);
+  border-bottom:1px solid var(--border);flex-shrink:0;}
+.gm-hdr h2{font-size:14px;font-weight:700;flex:1;line-height:1.4;font-family:var(--font);}
+.gm-close{font-family:var(--font);font-size:12px;padding:6px 16px;border-radius:7px;border:1px solid var(--border);
+  background:none;color:var(--muted);cursor:pointer;transition:all .15s;}
+.gm-close:hover{border-color:var(--danger);color:var(--danger);}
+.gm-body{flex:1;overflow:auto;padding:16px 20px;}
+.gm-phase-section{margin-bottom:20px;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
+.gm-phase-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.07);}
+.gm-phase-hdr h3{font-size:12px;font-weight:700;font-family:var(--font);flex:1;}
+.gm-done-btn{font-family:var(--font);font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;
+  border:1px solid rgba(110,231,183,.3);background:rgba(110,231,183,.08);color:#6ee7b7;cursor:pointer;
+  transition:all .15s;white-space:nowrap;}
+.gm-done-btn:hover{background:rgba(110,231,183,.2);}
+.gm-done-btn.marked{background:rgba(110,231,183,.2);border-color:#6ee7b7;}
+.gm-milestones{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;padding:12px 16px;}
+.gm-ms-card{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.2);
+  font-family:var(--font);}
+.gm-ms-card .ms-name{font-size:12px;font-weight:600;margin-bottom:4px;}
+.gm-ms-card .ms-date{font-size:11px;font-family:var(--mono);margin-bottom:3px;}
+.gm-ms-card .ms-status{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;display:inline-block;}
+
+/* Gantt timeline bar in modal */
+.gm-timeline{position:relative;overflow-x:auto;margin-top:8px;}
+.gm-timeline-inner{min-width:800px;position:relative;}
+.gm-month-hdr{display:flex;border-bottom:1px solid rgba(255,255,255,.08);}
+.gm-month-cell{flex:1;text-align:center;font-size:9px;font-weight:700;color:var(--muted);
+  padding:5px 2px;border-right:1px solid rgba(255,255,255,.04);font-family:var(--font);}
+.gm-phase-bar-row{display:flex;border-bottom:1px solid rgba(255,255,255,.04);min-height:40px;align-items:center;}
+.gm-phase-name-col{width:160px;flex-shrink:0;padding:6px 12px;font-size:11px;font-weight:600;
+  border-right:1px solid rgba(255,255,255,.06);font-family:var(--font);}
+.gm-bar-col{flex:1;position:relative;height:40px;}
+
+/* ── ALERT TABLE MODAL ── */
+#alertModal{position:fixed;inset:0;z-index:950;background:rgba(6,14,24,.9);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;font-family:var(--font);padding:20px;}
+#alertModal.open{display:flex;}
+.am-box{background:var(--navy2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:900px;
+  max-height:85vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.7);}
+.am-hdr{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.am-hdr h3{font-size:15px;font-weight:800;flex:1;font-family:var(--font);}
+.am-close{font-size:20px;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px 8px;
+  border-radius:6px;font-family:var(--font);}
+.am-close:hover{color:var(--danger);}
+.am-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);flex-shrink:0;}
+.am-tab{font-family:var(--font);font-size:12px;font-weight:700;padding:10px 20px;border:none;
+  background:none;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
+.am-tab.active{color:var(--text);border-bottom-color:var(--accent);}
+.am-body{overflow:auto;flex:1;padding:16px;}
+.am-table{width:100%;border-collapse:collapse;font-family:var(--font);font-size:12px;}
+.am-table th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+.am-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.am-table tr:hover td{background:rgba(0,194,255,.04);}
+.am-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 9px;
+  border-radius:5px;font-family:var(--font);}
+.am-badge.over{background:rgba(255,79,79,.15);color:var(--danger);border:1px solid rgba(255,79,79,.3);}
+.am-badge.warn{background:rgba(255,179,71,.15);color:var(--warn);border:1px solid rgba(255,179,71,.3);}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+#milestoneEditModal.open { display: flex !important; }
+#addMilestoneModal.open { display: flex !important; }
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes slideRight{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
@@ -430,13 +518,41 @@ textarea.fc{resize:vertical;min-height:80px}
     <!-- ── TAB GANTT ── -->
     <div id="tab-gantt" class="tab-panel">
       <div id="ganttWrap">
-        <div class="gantt-hdr">
-          <h2>📅 Biểu đồ Gantt – Timeline dự án</h2>
-          <select id="ganttFilter" class="fc" style="width:200px;padding:6px 10px;font-size:12px" onchange="renderGantt()">
-            <option value="">Tất cả trạng thái</option>
-            <option value="P2_P8">P02/P08</option><option value="P4">P04</option>
-            <option value="CHO_KE_HOACH">Chờ KH</option><option value="TRINH_DUYET_DM">Trình DM</option>
-          </select>
+        <!-- Header bar -->
+        <div class="gantt-hdr" style="flex-wrap:wrap;gap:10px;padding:14px 20px">
+          <h2 style="margin:0;font-size:15px;font-family:var(--font)">📅 Biểu đồ Gantt – Phân kỳ dự án</h2>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto">
+            <select id="ganttFilter" class="fc" style="width:170px;padding:5px 10px;font-size:12px" onchange="renderGantt()">
+              <option value="">Tất cả trạng thái</option>
+              <option value="P2_P8">P02/P08</option><option value="P4">P04</option>
+              <option value="CHO_KE_HOACH">Chờ KH</option><option value="TRINH_DUYET_DM">Trình DM</option>
+            </select>
+            <!-- Warning threshold config -->
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(255,179,71,.12);border:1px solid rgba(255,179,71,.3);border-radius:8px;padding:5px 12px;font-family:var(--font)">
+              <span style="font-size:12px">⏰ Cảnh báo trước</span>
+              <input id="warnDays" type="number" min="1" max="90" value="14"
+                style="width:52px;padding:3px 6px;font-size:12px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:5px;color:#fff;text-align:center;font-family:var(--mono)"
+                onchange="renderGantt()">
+              <span style="font-size:12px">ngày</span>
+            </div>
+            <button class="btn" onclick="checkAndSendAlerts()" style="background:rgba(255,79,79,.15);border:1px solid rgba(255,79,79,.4);color:var(--danger);font-size:12px;padding:5px 14px;font-family:var(--font)">
+              🔔 Kiểm tra &amp; Gửi cảnh báo
+            </button>
+          </div>
+        </div>
+        <!-- Alert summary bar (clickable) -->
+        <div id="ganttAlertBar" onclick="openAlertTable()" style="display:none;background:rgba(255,79,79,.08);border-left:3px solid var(--danger);margin:0 16px 12px;padding:10px 16px;border-radius:6px;font-size:13px;cursor:pointer;transition:background .2s;font-family:var(--font)"
+          onmouseover="this.style.background='rgba(255,79,79,.14)'" onmouseout="this.style.background='rgba(255,79,79,.08)'"></div>
+        <!-- Legend chips (clickable filter) -->
+        <div style="display:flex;gap:8px;padding:6px 16px 14px;flex-wrap:wrap;align-items:center">
+          <span style="font-size:11px;color:var(--muted);margin-right:4px;font-family:var(--font)">Lọc theo:</span>
+          <button class="g-legend-btn active" data-status="" onclick="setGanttStatusFilter(this,'')">📋 Tất cả</button>
+          <button class="g-legend-btn" data-status="done" onclick="setGanttStatusFilter(this,'done')"><span style="width:9px;height:9px;border-radius:50%;background:#6ee7b7;display:inline-block;margin-right:4px"></span>Hoàn thành</button>
+          <button class="g-legend-btn" data-status="ok" onclick="setGanttStatusFilter(this,'ok')"><span style="width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:4px"></span>Đúng tiến độ</button>
+          <button class="g-legend-btn" data-status="warn" onclick="setGanttStatusFilter(this,'warn')"><span style="width:9px;height:9px;border-radius:50%;background:var(--warn);display:inline-block;margin-right:4px"></span>Sắp đến hạn</button>
+          <button class="g-legend-btn" data-status="over" onclick="setGanttStatusFilter(this,'over')"><span style="width:9px;height:9px;border-radius:50%;background:var(--danger);display:inline-block;margin-right:4px"></span>Quá hạn</button>
+          <button class="g-legend-btn" data-status="future" onclick="setGanttStatusFilter(this,'future')"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);display:inline-block;margin-right:4px"></span>Chưa đến</button>
+          <span style="margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--font)">👆 Click vào dự án để xem Gantt full màn hình</span>
         </div>
         <div id="ganttCanvas"></div>
       </div>
@@ -682,6 +798,142 @@ textarea.fc{resize:vertical;min-height:80px}
   </div>
 </div>
 
+<!-- ═══ GANTT FULLSCREEN MODAL ═══ -->
+<div id="ganttModal">
+  <div class="gm-hdr">
+    <span style="font-size:22px">📅</span>
+    <h2 id="gmTitle">Gantt – Phân kỳ dự án</h2>
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:6px;background:rgba(255,179,71,.12);border:1px solid rgba(255,179,71,.3);border-radius:8px;padding:4px 10px;font-size:12px">
+        ⏰ Cảnh báo <input id="gmWarnDays" type="number" min="1" max="90" value="14"
+          style="width:44px;padding:2px 5px;font-size:12px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;text-align:center;font-family:var(--mono)"
+          onchange="renderGmDetail()"> ngày
+      </div>
+      <button class="gm-close" onclick="closeGanttModal()">✕ Đóng</button>
+    </div>
+  </div>
+  <!-- Legend inside modal -->
+  <div style="display:flex;gap:12px;padding:10px 20px;background:rgba(0,0,0,.2);border-bottom:1px solid var(--border);flex-wrap:wrap;font-family:var(--font)">
+    <span style="font-size:11px;color:var(--muted)">Trạng thái cột mốc:</span>
+    <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:#6ee7b7;display:inline-block"></span>Hoàn thành</span>
+    <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block"></span>Đúng tiến độ</span>
+    <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:var(--warn);display:inline-block"></span>Sắp đến hạn</span>
+    <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:var(--danger);display:inline-block"></span>Quá hạn / Chưa hoàn thành</span>
+    <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-block"></span>Chưa đến</span>
+    <span style="margin-left:auto;font-size:11px;color:var(--muted)">✅ Nhấn "Đánh dấu hoàn thành" để ghi nhận đã xong</span>
+  </div>
+  <div class="gm-body" id="gmBody"></div>
+</div>
+
+<!-- ═══ ALERT TABLE MODAL ═══ -->
+<div id="alertModal" onclick="if(event.target===this)closeAlertModal()">
+  <div class="am-box">
+    <div class="am-hdr">
+      <span style="font-size:22px">🚨</span>
+      <h3>Chi tiết cột mốc cần chú ý</h3>
+      <button class="am-close" onclick="closeAlertModal()">✕</button>
+    </div>
+    <div class="am-tabs">
+      <button class="am-tab active" onclick="switchAmTab('over',this)">🔴 Quá hạn <span id="amOverCount" style="font-weight:800"></span></button>
+      <button class="am-tab" onclick="switchAmTab('warn',this)">🟡 Sắp đến hạn <span id="amWarnCount" style="font-weight:800"></span></button>
+      <button class="am-tab" onclick="switchAmTab('all',this)">📋 Tất cả</button>
+    </div>
+    <div class="am-body">
+      <div id="amContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Chỉnh sửa cột mốc ═══ -->
+<div id="milestoneEditModal" onclick="if(event.target===this)closeMilestoneEdit()"
+  style="position:fixed;inset:0;z-index:1100;background:rgba(6,14,24,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;font-family:var(--font)">
+  <div style="background:var(--navy2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:440px;box-shadow:0 32px 80px rgba(0,0,0,.7)">
+    <div class="mh" style="padding:16px 20px;border-bottom:1px solid var(--border)">
+      <span style="font-size:20px">✏️</span>
+      <h3 style="font-size:14px;font-weight:800">Chỉnh sửa cột mốc</h3>
+      <button class="mclose" onclick="closeMilestoneEdit()">×</button>
+    </div>
+    <div class="mb" style="padding:20px">
+      <div style="background:rgba(0,194,255,.07);border:1px solid rgba(0,194,255,.15);border-radius:8px;padding:12px;margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--accent)" id="gmePhase"></div>
+        <div style="font-size:13px;font-weight:600;margin:3px 0" id="gmeSub"></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px" id="gmeProject"></div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label class="fl">Ngày kế hoạch <span style="color:var(--danger)">*</span></label>
+        <input id="gmeDate" type="date" class="fc" style="font-family:var(--mono);font-size:14px"/>
+      </div>
+      <div>
+        <label class="fl">Ghi chú</label>
+        <textarea id="gmeNotes" class="fc" style="min-height:60px" placeholder="Ghi chú thêm về cột mốc này…"></textarea>
+      </div>
+    </div>
+    <div class="mf" style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn bg" onclick="closeMilestoneEdit()">Hủy</button>
+      <button class="btn bp" onclick="saveMilestoneEdit()">💾 Lưu thay đổi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Thêm phân kỳ dự án ═══ -->
+<div id="addMilestoneModal" onclick="if(event.target===this)closeAddMsModal()"
+  style="position:fixed;inset:0;z-index:1100;background:rgba(6,14,24,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;font-family:var(--font)">
+  <div style="background:var(--navy2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.7)">
+    <div class="mh" style="padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <span style="font-size:20px">📅</span>
+      <h3 style="font-size:14px;font-weight:800">Thêm / Chỉnh sửa Phân kỳ dự án</h3>
+      <button class="mclose" onclick="closeAddMsModal()">×</button>
+    </div>
+    <div style="padding:12px 20px 4px;flex-shrink:0;background:rgba(0,194,255,.05);border-bottom:1px solid var(--border)">
+      <div style="font-size:13px;font-weight:600;color:var(--text)" id="amsProjName"></div>
+    </div>
+    <!-- Current milestones list -->
+    <div style="flex:1;overflow:auto;padding:14px 20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Các cột mốc hiện tại</div>
+      <div id="amsMsRows" style="margin-bottom:16px;min-height:60px"></div>
+      <!-- Add new row -->
+      <div style="background:rgba(0,229,176,.05);border:1px solid rgba(0,229,176,.15);border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px">＋ Thêm cột mốc mới</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
+          <div>
+            <label class="fl">Giai đoạn</label>
+            <select id="amsNewPhase" class="fc" onchange="onPhaseChange()">
+              <option value="">-- Chọn giai đoạn --</option>
+              <option value="FS">FS</option>
+              <option value="BVTC">BVTC</option>
+              <option value="KHLCNT">KHLCNT</option>
+              <option value="Dự toán gói thầu">Dự toán gói thầu</option>
+              <option value="E-HSMT">E-HSMT</option>
+              <option value="KQLCNT">KQLCNT</option>
+              <option value="Hợp đồng">Hợp đồng</option>
+              <option value="__custom__">✏️ Tự nhập tên mới…</option>
+            </select>
+            <input id="amsCustomPhase" class="fc" type="text" placeholder="Tên giai đoạn mới…" style="display:none;margin-top:6px"/>
+          </div>
+          <div>
+            <label class="fl">Cột mốc</label>
+            <select id="amsNewSub" class="fc" onchange="onSubChange()">
+              <option value="">-- Chọn cột mốc --</option>
+            </select>
+            <input id="amsCustomSub" class="fc" type="text" placeholder="Tên cột mốc mới…" style="display:none;margin-top:6px"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:flex-end">
+          <div>
+            <label class="fl">Ngày kế hoạch</label>
+            <input id="amsNewDate" type="date" class="fc" style="font-family:var(--mono)"/>
+          </div>
+          <button class="btn" style="background:rgba(0,229,176,.15);border:1px solid rgba(0,229,176,.3);color:var(--accent2);padding:8px 16px;height:38px;white-space:nowrap;font-weight:700" onclick="addMsRow()">＋ Thêm</button>
+        </div>
+      </div>
+    </div>
+    <div class="mf" style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0">
+      <button class="btn bg" onclick="closeAddMsModal()">Hủy</button>
+      <button class="btn" onclick="saveAllMilestones()" style="background:linear-gradient(135deg,var(--accent2),#00a88a);color:#0b1929;font-weight:800;border:none">💾 Lưu vào Supabase</button>
+    </div>
+  </div>
+</div>
+
 <div id="toastWrap"></div>
 
 <!-- ════════════════════ SCRIPT ════════════════════ -->
@@ -699,6 +951,8 @@ const WH1 = 'https://n8nhome.chatpro.io.vn/webhook/cap-nhat-tien-do';  // #1 –
 const WH2 = 'https://n8nhome.chatpro.io.vn/webhook/flag-du-an';         // #2 – Flag vướng mắc / đổi trạng thái
 const WH3 = 'https://your-n8n/webhook/lay-du-lieu';         // #3 – Lấy dữ liệu + KPI
 const WH4 = 'https://your-n8n/webhook/kiem-tra-cham';      // #4 – Kiểm tra & gửi thông báo (mới)
+const WH5 = 'https://your-n8n/webhook/canh-bao-phan-ky';      // #5 – Cảnh báo cột mốc phân kỳ gần đến hạn
+const WH6 = 'https://n8nhome.chatpro.io.vn/webhook-test/luu-phan-ky-gantt';    // #6 – Lưu/cập nhật cột mốc Gantt → Supabase
 
 // ══════════════════════════════════════════════════════════════════════
 
@@ -748,7 +1002,7 @@ function showApp(){
 }
 
 // ─── LOAD DATA ────────────────────────────────────────────────────
-async function loadAll(){ await loadData(); await loadLog(); }
+async function loadAll(){ await loadData(); await loadLog(); await loadGanttFromSupabase(); }
 
 async function loadData(){
   try{
@@ -933,84 +1187,838 @@ function exportExcel(){
   toast('📥 Xuất '+rows.length+' dòng thành công','ok');
 }
 
-// ─── GANTT ────────────────────────────────────────────────────────
+// ─── LOAD GANTT FROM SUPABASE ────────────────────────────────────
+async function loadGanttFromSupabase(){
+  try{
+    const { data, error } = await db.from('gantt_milestones').select('*').order('sort_order');
+    if(error){ console.warn('gantt_milestones not yet created:', error.message); return; }
+    ganttLiveData = {};
+    if(data) data.forEach(row => {
+      const key = row.project_name + '::' + row.phase + '::' + row.sub_phase;
+      ganttLiveData[key] = row;
+      // Sync completion state
+      const phKey = getPhaseKey_byName(row.project_name, row.phase);
+      if(row.is_completed) phaseCompletions[phKey] = true;
+    });
+    console.log('Loaded', data ? data.length : 0, 'milestones from Supabase');
+    renderGantt();
+  } catch(e){ console.warn('loadGanttFromSupabase error:', e.message); }
+}
+
+function getPhaseKey_byName(projName, phase){ return projName + '|PHASE|' + phase; }
+
+// Merge GANTT_DATA with live overrides from Supabase
+function getMergedMilestones(gd){
+  return gd.m.map(m => {
+    const key = gd.n + '::' + m.g + '::' + m.s;
+    const live = ganttLiveData[key];
+    if(live) return { g: m.g, s: m.s, d: live.planned_date, id: live.id, is_completed: live.is_completed, notes: live.notes };
+    return m;
+  });
+}
+
+// Get all live milestones for a project name (from Supabase, NOT from GANTT_DATA)
+function getLiveMilestones(projName){
+  return Object.values(ganttLiveData).filter(r => r.project_name === projName);
+}
+
+// ── EDIT SINGLE MILESTONE DATE ────────────────────────────────────
+function openMilestoneEdit(projName, phase, subPhase, currentDate, id, event){
+  if(event) event.stopPropagation();
+  gmEditCtx = { projName, phase, subPhase, currentDate, id };
+  document.getElementById('gmeProject').textContent = projName.length > 60 ? projName.substring(0,60)+'…' : projName;
+  document.getElementById('gmePhase').textContent = phase;
+  document.getElementById('gmeSub').textContent = subPhase;
+  document.getElementById('gmeDate').value = currentDate || '';
+  document.getElementById('gmeNotes').value = '';
+  // Load existing notes if available
+  const key = projName + '::' + phase + '::' + subPhase;
+  const live = ganttLiveData[key];
+  if(live && live.notes) document.getElementById('gmeNotes').value = live.notes || '';
+  document.getElementById('milestoneEditModal').classList.add('open');
+}
+
+function closeMilestoneEdit(){ document.getElementById('milestoneEditModal').classList.remove('open'); gmEditCtx = null; }
+
+async function saveMilestoneEdit(){
+  if(!gmEditCtx) return;
+  const newDate = document.getElementById('gmeDate').value;
+  const notes = document.getElementById('gmeNotes').value.trim();
+  if(!newDate){ toast('Vui lòng chọn ngày','warn'); return; }
+  const payload = {
+    action: 'upsert',
+    milestone: {
+      project_name: gmEditCtx.projName,
+      phase: gmEditCtx.phase,
+      sub_phase: gmEditCtx.subPhase,
+      planned_date: newDate,
+      notes: notes || null,
+      sort_order: 0
+    }
+  };
+  if(gmEditCtx.id) payload.milestone.id = gmEditCtx.id;
+  await sendGanttToN8N(payload);
+  // Update local cache immediately
+  const key = gmEditCtx.projName + '::' + gmEditCtx.phase + '::' + gmEditCtx.subPhase;
+  if(!ganttLiveData[key]) ganttLiveData[key] = {};
+  ganttLiveData[key].planned_date = newDate;
+  ganttLiveData[key].notes = notes || null;
+  closeMilestoneEdit();
+  renderGmDetail();
+  renderGantt();
+  toast('✅ Đã lưu cột mốc','ok');
+}
+
+// ── ADD PHASE/MILESTONE MODAL (for projects without data) ──────────
+let addMsCtx = { projName: '', rows: [] }; // rows = [{phase, subPhase, date}]
+const PRESET_PHASES = ['FS','BVTC','KHLCNT','Dự toán gói thầu','E-HSMT','KQLCNT','Hợp đồng'];
+const PRESET_SUBS = {
+  'FS': ['NVKT','HĐ tư vấn','Lập','Phê duyệt'],
+  'BVTC': ['Lập','Phê duyệt'],
+  'KHLCNT': ['Lập','Thẩm định','Phê duyệt'],
+  'Dự toán gói thầu': ['Lập','Thẩm định','Phê duyệt'],
+  'E-HSMT': ['Lập','Thẩm định','Phê duyệt','Phát hành','Mở thầu','Đánh giá'],
+  'KQLCNT': ['Đối chiếu/ Thương thảo','Thẩm định','Phê duyệt KQLCNT'],
+  'Hợp đồng': ['Ký Hợp đồng','NT VTTB','Khởi công','Hoàn thành']
+};
+
+function openAddMilestoneModal(projName, event){
+  if(event) event.stopPropagation();
+  addMsCtx = { projName, rows: [] };
+  document.getElementById('amsProjName').textContent = projName.length > 60 ? projName.substring(0,60)+'…' : projName;
+  // Pre-load existing rows from Supabase for this project
+  const existing = getLiveMilestones(projName);
+  addMsCtx.rows = existing.map(r => ({
+    phase: r.phase, subPhase: r.sub_phase, date: r.planned_date, id: r.id
+  }));
+  renderAddMsRows();
+  // Reset new row inputs
+  document.getElementById('amsNewPhase').value = '';
+  document.getElementById('amsCustomPhase').value = '';
+  document.getElementById('amsNewSub').value = '';
+  document.getElementById('amsCustomSub').value = '';
+  document.getElementById('amsNewDate').value = '';
+  updateSubOptions();
+  document.getElementById('addMilestoneModal').classList.add('open');
+}
+
+function closeAddMsModal(){ document.getElementById('addMilestoneModal').classList.remove('open'); }
+
+function updateSubOptions(){
+  const phase = document.getElementById('amsNewPhase').value;
+  const subSel = document.getElementById('amsNewSub');
+  const subs = PRESET_SUBS[phase] || [];
+  const customOpt = '<option value="__custom__">-- Tự nhập --</option>';
+  subSel.innerHTML = '<option value="">-- Chọn cột mốc --</option>' +
+    subs.map(s => '<option value="' + s + '">' + s + '</option>').join('') + customOpt;
+  document.getElementById('amsCustomSub').style.display = 'none';
+}
+
+function onSubChange(){
+  const val = document.getElementById('amsNewSub').value;
+  document.getElementById('amsCustomSub').style.display = (val === '__custom__') ? 'block' : 'none';
+}
+
+function onPhaseChange(){
+  const val = document.getElementById('amsNewPhase').value;
+  document.getElementById('amsCustomPhase').style.display = (val === '__custom__') ? 'block' : 'none';
+  updateSubOptions();
+}
+
+function addMsRow(){
+  let phase = document.getElementById('amsNewPhase').value;
+  if(phase === '__custom__') phase = document.getElementById('amsCustomPhase').value.trim();
+  let subPhase = document.getElementById('amsNewSub').value;
+  if(subPhase === '__custom__') subPhase = document.getElementById('amsCustomSub').value.trim();
+  const date = document.getElementById('amsNewDate').value;
+  if(!phase){ toast('Vui lòng chọn hoặc nhập tên giai đoạn','warn'); return; }
+  if(!subPhase){ toast('Vui lòng chọn hoặc nhập tên cột mốc','warn'); return; }
+  if(!date){ toast('Vui lòng chọn ngày','warn'); return; }
+  // Check duplicate
+  const dup = addMsCtx.rows.find(r => r.phase===phase && r.subPhase===subPhase);
+  if(dup){ toast('Cột mốc này đã tồn tại, hãy sửa trực tiếp','warn'); return; }
+  addMsCtx.rows.push({ phase, subPhase, date });
+  renderAddMsRows();
+  // Reset
+  document.getElementById('amsNewSub').value = '';
+  document.getElementById('amsNewDate').value = '';
+}
+
+function removeMsRow(idx){
+  addMsCtx.rows.splice(idx,1);
+  renderAddMsRows();
+}
+
+function renderAddMsRows(){
+  const el = document.getElementById('amsMsRows');
+  if(!addMsCtx.rows.length){
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px">Chưa có cột mốc nào. Thêm từ form bên dưới.</div>';
+    return;
+  }
+  // Group by phase
+  const groups = {};
+  addMsCtx.rows.forEach((r,i) => {
+    if(!groups[r.phase]) groups[r.phase] = [];
+    groups[r.phase].push({...r, idx: i});
+  });
+  let html = '';
+  Object.entries(groups).forEach(([phase, rows]) => {
+    const pc = PHASE_COLORS[phase] || {bg:'rgba(255,255,255,.05)',border:'rgba(255,255,255,.15)',text:'#fff',dot:'#888'};
+    html += '<div style="margin-bottom:8px">';
+    html += '<div style="padding:6px 12px;border-radius:6px 6px 0 0;font-size:11px;font-weight:700;background:' + pc.bg + ';border:1px solid ' + pc.border + ';color:' + pc.text + '">' + phase + '</div>';
+    html += '<table style="width:100%;border-collapse:collapse;border:1px solid rgba(255,255,255,.06);border-top:none">';
+    rows.forEach(r => {
+      const dFmt = r.date ? new Date(r.date).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'}) : '–';
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">';
+      html += '<td style="padding:7px 12px;font-size:12px">' + r.subPhase + '</td>';
+      html += '<td style="padding:7px 12px;font-size:12px;font-family:var(--mono);color:var(--accent)">' + dFmt + '</td>';
+      html += '<td style="padding:7px 6px;text-align:right"><button onclick="removeMsRow(' + r.idx + ')" style="background:none;border:1px solid rgba(255,79,79,.3);color:var(--danger);border-radius:4px;padding:2px 8px;cursor:pointer;font-size:10px">✕</button></td>';
+      html += '</tr>';
+    });
+    html += '</table></div>';
+  });
+  el.innerHTML = html;
+}
+
+async function saveAllMilestones(){
+  if(!addMsCtx.rows.length){ toast('Chưa có cột mốc nào để lưu','warn'); return; }
+  const milestones = addMsCtx.rows.map((r,i) => ({
+    project_name: addMsCtx.projName,
+    phase: r.phase,
+    sub_phase: r.subPhase,
+    planned_date: r.date,
+    sort_order: i
+  }));
+  const payload = { action: 'batch_import', milestones };
+  await sendGanttToN8N(payload);
+  // Update local cache
+  milestones.forEach(m => {
+    const key = m.project_name + '::' + m.phase + '::' + m.sub_phase;
+    if(!ganttLiveData[key]) ganttLiveData[key] = {};
+    Object.assign(ganttLiveData[key], m);
+  });
+  closeAddMsModal();
+  renderGantt();
+  toast('✅ Đã lưu ' + milestones.length + ' cột mốc','ok');
+}
+
+// ── SEND TO N8N ───────────────────────────────────────────────────
+async function sendGanttToN8N(payload){
+  const wh = WH6 && !WH6.includes('your-n8n') ? WH6 : null;
+  if(!wh){
+    // Fallback: save directly to Supabase if no webhook configured
+    const user = currentUser?.email?.split('@')[0] || 'system';
+    if(payload.action === 'upsert' && payload.milestone){
+      const m = payload.milestone;
+      await db.from('gantt_milestones').upsert({...m}, {onConflict:'project_name,phase,sub_phase'});
+    } else if(payload.action === 'batch_import' && payload.milestones){
+      await db.from('gantt_milestones').upsert(payload.milestones, {onConflict:'project_name,phase,sub_phase'});
+    } else if(payload.action === 'complete'){
+      await db.from('gantt_milestones').update({
+        is_completed: payload.is_completed,
+        completed_by: user,
+        completed_at: new Date().toISOString()
+      }).eq('project_name', payload.project_name).eq('phase', payload.phase);
+    } else if(payload.action === 'delete'){
+      if(payload.id){
+        await db.from('gantt_milestones').delete().eq('id', payload.id);
+      } else {
+        await db.from('gantt_milestones').delete()
+          .eq('project_name', payload.project_name)
+          .eq('phase', payload.phase)
+          .eq('sub_phase', payload.sub_phase);
+      }
+    }
+    return;
+  }
+  try{
+    const res = await fetch(wh, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    if(!res.ok) console.error('WH6 error:', res.status);
+  } catch(e){ console.error('WH6 fetch error:', e.message); }
+}
+
+// ── DELETE MILESTONE ──────────────────────────────────────────────
+async function deleteMilestone(projName, phase, subPhase, id, event){
+  if(event) event.stopPropagation();
+  const confirm = window.confirm(`Xóa cột mốc "${subPhase}" (${phase})?\nThao tác này không thể hoàn tác.`);
+  if(!confirm) return;
+  // Remove from local cache immediately
+  const key = projName + '::' + phase + '::' + subPhase;
+  delete ganttLiveData[key];
+  // Also remove from GANTT_DATA override by restoring original if applicable
+  // Send delete to N8N / Supabase
+  await sendGanttToN8N({ action:'delete', project_name: projName, phase, sub_phase: subPhase, id: id||null });
+  toast(`🗑 Đã xóa cột mốc "${subPhase}"`, 'ok');
+  // Reload from Supabase to sync
+  await loadGanttFromSupabase();
+  renderGmDetail();
+  renderGantt();
+}
+
+// ── UPDATE togglePhaseDone to also save to Supabase ───────────────
+async function togglePhaseDoneWithSave(projName, gdIdx, grp){
+  const phKey = gdIdx >= 0 ? getPhaseKey(gdIdx, grp) : getPhaseKey_byName(projName, grp);
+  phaseCompletions[phKey] = !phaseCompletions[phKey];
+  const isDone = phaseCompletions[phKey];
+  const user = currentUser?.email?.split('@')[0] || 'system';
+  await sendGanttToN8N({ action:'complete', project_name: projName, phase: grp, is_completed: isDone, completed_by: user });
+  renderGmDetail();
+  renderGantt();
+  toast(isDone ? '✅ Đã đánh dấu hoàn thành' : '↩ Đã bỏ đánh dấu hoàn thành','ok');
+}
+
+
+// ─── GANTT PHÂN KỲ DỰ ÁN ────────────────────────────────────────
+// Dữ liệu phân kỳ từ Excel ĐTXD (25 dự án, 7 giai đoạn)
+const GANTT_DATA = [{"n":"Bổ sung hệ thống truy cập và tự động đọc bản ghi sự cố rơle từ xa 06 TBA 110kV.","m":[{"g":"KHLCNT","s":"Lập","d":"2025-02-25"},{"g":"KHLCNT","s":"Thẩm định","d":"2025-02-26"},{"g":"KHLCNT","s":"Phê duyệt","d":"2025-02-28"},{"g":"Dự toán gói thầu","s":"Lập","d":"2025-03-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2025-03-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2025-03-06"},{"g":"E-HSMT","s":"Lập","d":"2025-03-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2025-03-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2025-03-16"},{"g":"E-HSMT","s":"Phát hành","d":"2025-03-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2025-03-31"},{"g":"E-HSMT","s":"Đánh giá","d":"2025-04-15"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2025-04-20"},{"g":"KQLCNT","s":"Thẩm định","d":"2025-04-25"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2025-04-28"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2025-05-05"},{"g":"Hợp đồng","s":"NT VTTB","d":"2025-08-03"},{"g":"Hợp đồng","s":"Khởi công","d":"2025-08-13"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2025-10-12"}]},{"n":"Cải tạo hệ thống điều khiển bảo vệ trạm 110kV E1.42 Sân bay Nội Bài","m":[{"g":"KHLCNT","s":"Lập","d":"2025-02-25"},{"g":"KHLCNT","s":"Thẩm định","d":"2025-02-26"},{"g":"KHLCNT","s":"Phê duyệt","d":"2025-02-28"},{"g":"Dự toán gói thầu","s":"Lập","d":"2025-03-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2025-03-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2025-03-06"},{"g":"E-HSMT","s":"Lập","d":"2025-03-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2025-03-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2025-03-16"},{"g":"E-HSMT","s":"Phát hành","d":"2025-03-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2025-03-31"},{"g":"E-HSMT","s":"Đánh giá","d":"2025-04-15"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2025-04-20"},{"g":"KQLCNT","s":"Thẩm định","d":"2025-04-25"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2025-04-28"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2025-05-05"},{"g":"Hợp đồng","s":"NT VTTB","d":"2025-07-04"},{"g":"Hợp đồng","s":"Khởi công","d":"2025-07-14"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2025-10-12"}]},{"n":"Cải tạo hệ thống điều khiển bảo vệ trạm 110kV E1.31 Trôi","m":[{"g":"KHLCNT","s":"Lập","d":"2025-02-25"},{"g":"KHLCNT","s":"Thẩm định","d":"2025-02-26"},{"g":"KHLCNT","s":"Phê duyệt","d":"2025-02-28"},{"g":"Dự toán gói thầu","s":"Lập","d":"2025-03-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2025-03-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2025-03-06"},{"g":"E-HSMT","s":"Lập","d":"2025-03-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2025-03-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2025-03-16"},{"g":"E-HSMT","s":"Phát hành","d":"2025-03-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2025-03-31"},{"g":"E-HSMT","s":"Đánh giá","d":"2025-04-15"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2025-04-20"},{"g":"KQLCNT","s":"Thẩm định","d":"2025-04-25"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2025-04-28"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2025-05-05"},{"g":"Hợp đồng","s":"NT VTTB","d":"2025-07-04"},{"g":"Hợp đồng","s":"Khởi công","d":"2025-07-14"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2025-10-12"}]},{"n":"Cải tạo hệ thống điều khiển bảo vệ trạm 110kV E1.36 Quang Minh","m":[{"g":"KHLCNT","s":"Lập","d":"2025-02-25"},{"g":"KHLCNT","s":"Thẩm định","d":"2025-02-26"},{"g":"KHLCNT","s":"Phê duyệt","d":"2025-02-28"},{"g":"Dự toán gói thầu","s":"Lập","d":"2025-03-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2025-03-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2025-03-06"},{"g":"E-HSMT","s":"Lập","d":"2025-03-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2025-03-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2025-03-16"},{"g":"E-HSMT","s":"Phát hành","d":"2025-03-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2025-03-31"},{"g":"E-HSMT","s":"Đánh giá","d":"2025-04-15"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2025-04-20"},{"g":"KQLCNT","s":"Thẩm định","d":"2025-04-25"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2025-04-28"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2025-05-05"},{"g":"Hợp đồng","s":"NT VTTB","d":"2025-07-04"},{"g":"Hợp đồng","s":"Khởi công","d":"2025-07-14"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2025-10-12"}]},{"n":"Cải tạo hệ thống điều khiển bảo vệ phía 110kV; thay thế hệ thống tủ trung thế C41, C42 E1.33 Cầu Diễn","m":[{"g":"FS","s":"Phê duyệt","d":"2026-04-01"},{"g":"BVTC","s":"Lập","d":"2026-05-01"},{"g":"BVTC","s":"Phê duyệt","d":"2026-06-30"},{"g":"KHLCNT","s":"Lập","d":"2026-06-30"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-01"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-03"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-07-08"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-07-13"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-07-15"},{"g":"E-HSMT","s":"Lập","d":"2026-07-22"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-07-27"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-07-29"},{"g":"E-HSMT","s":"Phát hành","d":"2026-07-29"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-08-16"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-08-31"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-05"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-08"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-09-11"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-09-16"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-12-15"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-12-25"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-03-25"}]},{"n":"Cải tạo hệ thống điều khiển bảo vệ trạm 110kV E1.37 Bắc An Khánh","m":[{"g":"FS","s":"Phê duyệt","d":"2026-03-31"},{"g":"KHLCNT","s":"Lập","d":"2026-04-20"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-04-21"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-04-23"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-04-24"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-04-27"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-04-29"},{"g":"E-HSMT","s":"Lập","d":"2026-05-04"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-07"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-09"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-09"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-05-24"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-08"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-13"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-18"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-06-21"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-06-28"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-08-27"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-09-06"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-12-05"}]},{"n":"Nâng công suất T3 TBA 110kV Linh Đàm","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-02-13"},{"g":"FS","s":"Lập","d":"2026-03-30"},{"g":"FS","s":"Phê duyệt","d":"2026-04-14"},{"g":"KHLCNT","s":"Lập","d":"2026-04-29"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-04-30"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-02"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-03"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-06"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-08"},{"g":"E-HSMT","s":"Lập","d":"2026-05-13"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-16"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-18"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-18"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-02"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-17"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-22"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-27"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-06-30"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-07"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-08-06"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-08-16"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-09-15"}]},{"n":"Lắp MBA T3 trạm 110kV Ngọc Hồi","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-03-15"},{"g":"FS","s":"Lập","d":"2026-04-29"},{"g":"FS","s":"Phê duyệt","d":"2026-05-29"},{"g":"BVTC","s":"Lập","d":"2026-06-28"},{"g":"BVTC","s":"Phê duyệt","d":"2026-07-28"},{"g":"KHLCNT","s":"Lập","d":"2026-07-28"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-29"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-31"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-06"},{"g":"E-HSMT","s":"Lập","d":"2026-08-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-08-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-08-16"},{"g":"E-HSMT","s":"Phát hành","d":"2026-08-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-03"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-09-18"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-23"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-28"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-01"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-08"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-03-07"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-10-18"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-26"}]},{"n":"Nâng công suất MBA T2 TBA 110kV Sân bay Nội Bài","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-02-13"},{"g":"FS","s":"Lập","d":"2026-03-30"},{"g":"FS","s":"Phê duyệt","d":"2026-04-14"},{"g":"KHLCNT","s":"Lập","d":"2026-04-29"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-04-30"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-02"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-03"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-06"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-08"},{"g":"E-HSMT","s":"Lập","d":"2026-05-13"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-16"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-18"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-18"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-02"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-17"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-22"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-27"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-06-30"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-07"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-08-06"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-08-16"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-09-15"}]},{"n":"Lắp MBA T3 trạm 110kV Phùng Xá","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-03-15"},{"g":"FS","s":"Lập","d":"2026-04-29"},{"g":"FS","s":"Phê duyệt","d":"2026-05-29"},{"g":"BVTC","s":"Lập","d":"2026-06-28"},{"g":"BVTC","s":"Phê duyệt","d":"2026-07-28"},{"g":"KHLCNT","s":"Lập","d":"2026-07-28"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-29"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-31"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-06"},{"g":"E-HSMT","s":"Lập","d":"2026-08-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-08-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-08-16"},{"g":"E-HSMT","s":"Phát hành","d":"2026-08-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-03"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-09-18"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-23"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-28"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-01"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-08"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-03-07"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-10-18"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-26"}]},{"n":"Lắp MBA T2 trạm 110kV Thạch Thất 2","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-02-13"},{"g":"FS","s":"Lập","d":"2026-03-30"},{"g":"FS","s":"Phê duyệt","d":"2026-04-14"},{"g":"KHLCNT","s":"Lập","d":"2026-04-29"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-04-30"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-02"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-03"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-06"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-08"},{"g":"E-HSMT","s":"Lập","d":"2026-05-13"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-16"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-18"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-18"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-02"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-17"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-22"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-27"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-06-30"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-07"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-08-06"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-08-16"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-09-15"}]},{"n":"Nâng công suất T3 TBA 110kV Vân Đình","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-02-13"},{"g":"FS","s":"Lập","d":"2026-03-30"},{"g":"FS","s":"Phê duyệt","d":"2026-04-14"},{"g":"KHLCNT","s":"Lập","d":"2026-04-29"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-04-30"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-02"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-03"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-06"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-08"},{"g":"E-HSMT","s":"Lập","d":"2026-05-13"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-16"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-18"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-18"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-02"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-17"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-22"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-27"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-06-30"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-07"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-08-06"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-08-16"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-09-15"}]},{"n":"Nâng công suất T1 TBA 110kV Phú Nghĩa","m":[{"g":"FS","s":"Phê duyệt","d":"2026-04-14"},{"g":"KHLCNT","s":"Lập","d":"2026-05-14"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-05-15"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-17"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-18"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-21"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-23"},{"g":"E-HSMT","s":"Lập","d":"2026-05-28"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-31"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-06-02"},{"g":"E-HSMT","s":"Phát hành","d":"2026-06-02"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-17"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-07-02"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-07-07"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-07-12"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-07-15"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-22"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-11-19"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-11-29"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-12-29"}]},{"n":"Lắp MBA T2 trạm 110kV Hồng Dương","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-03-15"},{"g":"FS","s":"Lập","d":"2026-04-29"},{"g":"FS","s":"Phê duyệt","d":"2026-05-29"},{"g":"BVTC","s":"Lập","d":"2026-06-28"},{"g":"BVTC","s":"Phê duyệt","d":"2026-07-28"},{"g":"KHLCNT","s":"Lập","d":"2026-07-28"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-29"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-31"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-06"},{"g":"E-HSMT","s":"Lập","d":"2026-08-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-08-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-08-16"},{"g":"E-HSMT","s":"Phát hành","d":"2026-08-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-03"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-09-18"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-23"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-28"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-01"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-08"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-03-07"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-10-18"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-26"}]},{"n":"Lắp MBA T2 trạm 110kV Mỹ Đức","m":[{"g":"FS","s":"HĐ tư vấn","d":"2026-03-15"},{"g":"FS","s":"Lập","d":"2026-04-29"},{"g":"FS","s":"Phê duyệt","d":"2026-05-29"},{"g":"BVTC","s":"Lập","d":"2026-06-28"},{"g":"BVTC","s":"Phê duyệt","d":"2026-07-28"},{"g":"KHLCNT","s":"Lập","d":"2026-07-28"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-29"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-31"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-01"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-04"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-06"},{"g":"E-HSMT","s":"Lập","d":"2026-08-11"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-08-14"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-08-16"},{"g":"E-HSMT","s":"Phát hành","d":"2026-08-16"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-03"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-09-18"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-23"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-28"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-01"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-08"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-03-07"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-10-18"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-26"}]},{"n":"Lắp MBA T2 trạm 110kV Phúc Thọ 2","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-07-08"},{"g":"FS","s":"Phê duyệt","d":"2026-08-22"},{"g":"BVTC","s":"Lập","d":"2026-09-21"},{"g":"BVTC","s":"Phê duyệt","d":"2026-10-21"},{"g":"KHLCNT","s":"Lập","d":"2026-10-21"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-10-22"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-10-24"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-10-25"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-10-28"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-10-30"},{"g":"E-HSMT","s":"Lập","d":"2026-11-04"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-11-07"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-11-09"},{"g":"E-HSMT","s":"Phát hành","d":"2026-11-09"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-11-27"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-12-12"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-12-17"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-12-22"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-12-25"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2027-01-01"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-06-30"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-07-10"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-10-08"}]},{"n":"Lắp bổ sung chống sét van có khe hở ngoài cho tuyến đường dây 110kV 175, 176 T500 Thường Tín - E1.39 Thanh Oai, DDK 181, 182 E1.35 Sơn Tây - E1.53 Ba Vì","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-06-23"},{"g":"FS","s":"Phê duyệt","d":"2026-07-23"},{"g":"KHLCNT","s":"Lập","d":"2026-08-22"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-08-23"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-08-25"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-26"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-29"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-31"},{"g":"E-HSMT","s":"Lập","d":"2026-09-05"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-08"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-10"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-10"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-25"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-10"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-15"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-10-20"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-23"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-30"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-02-27"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-03-09"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-08"}]},{"n":"Thí điểm giám sát PD và nhiệt độ online cáp ngầm 110kV: Tuyến cáp ngầm 173, 174 E1.40 Tây Hồ - E1.8 Yên Phụ, E1.18 Bờ Hồ","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-06-23"},{"g":"FS","s":"Phê duyệt","d":"2026-07-23"},{"g":"KHLCNT","s":"Lập","d":"2026-08-22"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-08-23"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-08-25"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-26"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-29"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-31"},{"g":"E-HSMT","s":"Lập","d":"2026-09-05"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-08"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-10"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-10"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-25"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-10"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-15"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-10-20"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-23"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-30"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-02-27"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-03-09"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-08"}]},{"n":"Trang bị hệ thống giám sát nhiệt độ, độ ẩm online cho các TBA khu vực trung tâm Hà Nội.","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-06-23"},{"g":"FS","s":"Phê duyệt","d":"2026-07-23"},{"g":"KHLCNT","s":"Lập","d":"2026-08-22"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-08-23"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-08-25"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-26"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-29"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-31"},{"g":"E-HSMT","s":"Lập","d":"2026-09-05"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-08"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-10"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-10"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-25"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-10"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-15"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-10-20"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-23"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-30"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-02-27"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-03-09"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-06-07"}]},{"n":"Cải tạo hệ thống thanh cái trung thế phục vụ hạ áp lưới 35kV và khai thác tải 22kV TBA E1.1 Đông Anh","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-07-08"},{"g":"FS","s":"Phê duyệt","d":"2026-08-07"},{"g":"KHLCNT","s":"Lập","d":"2026-09-06"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-09-07"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-09-09"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-09-10"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-09-13"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-09-15"},{"g":"E-HSMT","s":"Lập","d":"2026-09-20"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-23"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-25"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-25"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-10-10"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-25"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-30"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-11-04"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-11-07"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-11-14"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-01-13"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-01-23"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-03-24"}]},{"n":"Cải tạo hệ thống thanh cái trung thế phục vụ hạ áp lưới 35kV và khai thác tải 22kV trạm E1.31 Trôi","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-07-08"},{"g":"FS","s":"Phê duyệt","d":"2026-08-07"},{"g":"KHLCNT","s":"Lập","d":"2026-09-06"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-09-07"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-09-09"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-09-10"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-09-13"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-09-15"},{"g":"E-HSMT","s":"Lập","d":"2026-09-20"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-23"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-25"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-25"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-10-10"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-25"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-30"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-11-04"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-11-07"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-11-14"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-01-13"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-01-23"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-03-24"}]},{"n":"Cải tạo hệ thống tiếp địa trạm biến áp 110kV Sơn Tây 2 E1.44, Đông Anh 2 E1.49","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-06-08"},{"g":"FS","s":"Phê duyệt","d":"2026-07-08"},{"g":"KHLCNT","s":"Lập","d":"2026-08-07"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-08-08"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-08-10"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-08-11"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-08-14"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-08-16"},{"g":"E-HSMT","s":"Lập","d":"2026-08-21"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-08-24"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-08-26"},{"g":"E-HSMT","s":"Phát hành","d":"2026-08-26"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-09-10"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-09-25"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-09-30"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-10-05"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-10-08"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-10-15"},{"g":"Hợp đồng","s":"NT VTTB","d":"2026-11-14"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-11-24"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-12-24"}]},{"n":"Nâng cao trình khoảng cột 34 - 36; 37 - 39 và 45 - 47 tuyến đường dây 171, 172 E1.6 Chèm - E1.4 Hà Đông","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-07-08"},{"g":"FS","s":"Phê duyệt","d":"2026-08-07"},{"g":"KHLCNT","s":"Lập","d":"2026-09-06"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-09-07"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-09-09"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-09-10"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-09-13"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-09-15"},{"g":"E-HSMT","s":"Lập","d":"2026-09-20"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-09-23"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-09-25"},{"g":"E-HSMT","s":"Phát hành","d":"2026-09-25"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-10-10"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-10-25"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-10-30"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-11-04"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-11-07"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-11-14"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-02-12"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-01-13"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-04-13"}]},{"n":"Xử lý chống úng ngập và cải tạo kiến trúc TBA 220kV E1.40 Tây Hồ","m":[{"g":"FS","s":"Phê duyệt","d":"2026-04-01"},{"g":"KHLCNT","s":"Lập","d":"2026-05-01"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-05-02"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-05-04"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-05-05"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-05-08"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-05-10"},{"g":"E-HSMT","s":"Lập","d":"2026-05-15"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-05-18"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-05-20"},{"g":"E-HSMT","s":"Phát hành","d":"2026-05-20"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-06-04"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-06-19"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-06-24"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-06-29"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-07-02"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-07-09"},{"g":"Hợp đồng","s":"Khởi công","d":"2026-07-24"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2026-11-26"}]},{"n":"Trang bị thí điểm thiết bị giám sát chất lượng điện năng tại thanh cái 22kV trạm CNC Hòa Lạc và một số vị tri trên đường dây (TBA) trong CNC Hòa Lạc - TP Hà Nội","m":[{"g":"FS","s":"NVKT","d":"2026-03-10"},{"g":"FS","s":"HĐ tư vấn","d":"2026-05-09"},{"g":"FS","s":"Lập","d":"2026-06-08"},{"g":"FS","s":"Phê duyệt","d":"2026-06-08"},{"g":"KHLCNT","s":"Lập","d":"2026-07-08"},{"g":"KHLCNT","s":"Thẩm định","d":"2026-07-09"},{"g":"KHLCNT","s":"Phê duyệt","d":"2026-07-11"},{"g":"Dự toán gói thầu","s":"Lập","d":"2026-07-12"},{"g":"Dự toán gói thầu","s":"Thẩm định","d":"2026-07-15"},{"g":"Dự toán gói thầu","s":"Phê duyệt","d":"2026-07-17"},{"g":"E-HSMT","s":"Lập","d":"2026-07-22"},{"g":"E-HSMT","s":"Thẩm định","d":"2026-07-25"},{"g":"E-HSMT","s":"Phê duyệt","d":"2026-07-27"},{"g":"E-HSMT","s":"Phát hành","d":"2026-07-27"},{"g":"E-HSMT","s":"Mở thầu","d":"2026-08-11"},{"g":"E-HSMT","s":"Đánh giá","d":"2026-08-26"},{"g":"KQLCNT","s":"Đối chiếu/ Thương thảo","d":"2026-08-31"},{"g":"KQLCNT","s":"Thẩm định","d":"2026-09-05"},{"g":"KQLCNT","s":"Phê duyệt KQLCNT","d":"2026-09-08"},{"g":"Hợp đồng","s":"Ký Hợp đồng","d":"2026-09-15"},{"g":"Hợp đồng","s":"NT VTTB","d":"2027-01-13"},{"g":"Hợp đồng","s":"Khởi công","d":"2027-01-23"},{"g":"Hợp đồng","s":"Hoàn thành","d":"2027-02-12"}]}];
+
+const PHASE_COLORS = {
+  'FS':                { bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)', text:'#c4b5fd', dot:'#c4b5fd' },
+  'BVTC':             { bg:'rgba(96,165,250,.15)',  border:'rgba(96,165,250,.4)',  text:'#93c5fd', dot:'#93c5fd' },
+  'KHLCNT':           { bg:'rgba(251,146,60,.15)',  border:'rgba(251,146,60,.4)',  text:'#fdba74', dot:'#fdba74' },
+  'Dự toán gói thầu': { bg:'rgba(244,114,182,.15)', border:'rgba(244,114,182,.4)', text:'#f9a8d4', dot:'#f9a8d4' },
+  'E-HSMT':           { bg:'rgba(52,211,153,.15)',  border:'rgba(52,211,153,.4)',  text:'#6ee7b7', dot:'#6ee7b7' },
+  'KQLCNT':           { bg:'rgba(250,204,21,.15)',  border:'rgba(250,204,21,.4)',  text:'#fde047', dot:'#fde047' },
+  'Hợp đồng':         { bg:'rgba(74,222,128,.15)',  border:'rgba(74,222,128,.4)',  text:'#86efac', dot:'#86efac' },
+};
+
+// Completion state: { 'projectIdx_phaseGroup': true/false }
+let phaseCompletions = {};
+// Current status filter for gantt list
+let ganttStatusFilter = '';
+// Alert data cache
+let lastAlerts = [];
+let curGmIdx = -1; // which GANTT_DATA project is open
+// Live data from Supabase: { 'projectName::phase::subPhase': {id, planned_date, is_completed, ...} }
+let ganttLiveData = {};
+// Edit modal state
+let gmEditCtx = null; // {projectName, phase, subPhase, currentDate, id}
+// Separate var to track project name when opening live-data (non-GANTT_DATA) project
+let curGmProjName = null;
+
+function getMsStatus(dateStr, warnDays, completed){
+  if(completed) return {cls:'done', label:'Đã hoàn thành'};
+  const today = new Date(); today.setHours(0,0,0,0);
+  const d = new Date(dateStr); d.setHours(0,0,0,0);
+  const diff = Math.round((d - today) / 86400000);
+  if(diff < 0)  return {cls:'over',  label:'Quá hạn '+Math.abs(diff)+' ngày', diff};
+  if(diff <= warnDays) return {cls:'warn', label:'Còn '+diff+' ngày', diff};
+  if(diff <= 90) return {cls:'ok',   label:'Còn '+diff+' ngày', diff};
+  return {cls:'future', label:d.toLocaleDateString('vi-VN'), diff};
+}
+
+function getPhaseKey(gdIdx, grp){ return gdIdx+'::'+grp; }
+
+function getProjectWorstStatus(gd, gdIdx, wd){
+  const groups = {};
+  gd.m.forEach(m => { if(!groups[m.g]) groups[m.g] = []; groups[m.g].push(m); });
+  let worst = 'future';
+  for(const [grp, mss] of Object.entries(groups)){
+    const key = getPhaseKey(gdIdx, grp);
+    const done = phaseCompletions[key];
+    if(done){ if(worst==='future'||worst==='ok') worst='done'; continue; }
+    for(const m of mss){
+      const s = getMsStatus(m.d, wd, false);
+      if(s.cls==='over') return 'over';
+      if(s.cls==='warn' && worst!=='over') worst = 'warn';
+      else if(s.cls==='ok' && (worst==='future'||worst==='done')) worst = 'ok';
+    }
+  }
+  return worst;
+}
+
+function setGanttStatusFilter(btn, status){
+  ganttStatusFilter = status;
+  document.querySelectorAll('.g-legend-btn').forEach(b => b.classList.toggle('active', b===btn));
+  renderGantt();
+}
+
 function renderGantt(){
-  const c=document.getElementById('ganttCanvas');
-  const ft=document.getElementById('ganttFilter')?.value||'';
-  const data=allProjects.filter(p=>!ft||p.trang_thai===ft);
-  if(!data.length){ c.innerHTML='<div class="empty-state">Không có dữ liệu</div>'; return; }
+  const c = document.getElementById('ganttCanvas');
+  const ft = document.getElementById('ganttFilter')?.value || '';
+  const wd = parseInt(document.getElementById('warnDays')?.value || '14');
 
-  const withD=data.filter(p=>p.ngay_bat_dau&&p.ngay_ket_thuc);
-  const noD=data.filter(p=>!p.ngay_bat_dau||!p.ngay_ket_thuc);
+  // Collect alerts
+  lastAlerts = [];
+  GANTT_DATA.forEach((gd, gi) => {
+    const groups = {};
+    gd.m.forEach(m => { if(!groups[m.g]) groups[m.g] = []; groups[m.g].push(m); });
+    Object.entries(groups).forEach(([grp, mss]) => {
+      const key = getPhaseKey(gi, grp);
+      if(phaseCompletions[key]) return;
+      mss.forEach(m => {
+        const s = getMsStatus(m.d, wd, false);
+        if(s.cls==='over'||s.cls==='warn'){
+          lastAlerts.push({gdIdx:gi, projectName:gd.n, phase:grp, sub:m.s, date:m.d, status:s});
+        }
+      });
+    });
+  });
 
-  if(!withD.length){
-    c.innerHTML=`<div class="empty-state">
-      <div style="font-size:40px;margin-bottom:12px">📅</div>
-      <div>Chưa có dự án nào được nhập ngày bắt đầu / kết thúc</div>
-      <div style="font-size:11px;margin-top:8px;opacity:.5">Cập nhật cột <code>ngay_bat_dau</code> và <code>ngay_ket_thuc</code> trong Supabase để hiển thị biểu đồ</div>
+  // Update alert bar
+  const alertBar = document.getElementById('ganttAlertBar');
+  const over = lastAlerts.filter(a=>a.status.cls==='over');
+  const warn = lastAlerts.filter(a=>a.status.cls==='warn');
+  if(lastAlerts.length){
+    alertBar.style.display='block';
+    alertBar.innerHTML = `🚨 <strong>Phát hiện ${lastAlerts.length} cột mốc cần chú ý</strong>: 
+      <span style="color:var(--danger)">${over.length} quá hạn</span>, 
+      <span style="color:var(--warn)">${warn.length} sắp đến hạn trong ${wd} ngày</span>
+      &nbsp;·&nbsp; <span style="color:var(--accent);text-decoration:underline">Xem chi tiết →</span>`;
+  } else {
+    alertBar.style.display='none';
+  }
+
+  // Build project rows
+  // Merge with allProjects for status info
+  const rows = GANTT_DATA.map((gd, gi) => {
+    const matched = allProjects.find(p => {
+      const pn = (p.ten_cong_trinh||'').replace(/\s+/g,' ').trim().toLowerCase();
+      const gn = gd.n.replace(/\s+/g,' ').trim().toLowerCase();
+      return pn && (pn.includes(gn.substring(0,25)) || gn.includes(pn.substring(0,25)));
+    });
+    if(ft && matched && matched.trang_thai !== ft) return null;
+    if(ft && !matched) return null;
+    const ws = getProjectWorstStatus(gd, gi, wd);
+    if(ganttStatusFilter && ws !== ganttStatusFilter) return null;
+    return {gi, gd, matched, ws};
+  }).filter(Boolean);
+
+  // Also add allProjects not in GANTT_DATA (only if no status filter or 'future')
+  const extraProjects = [];
+  if(!ganttStatusFilter || ganttStatusFilter==='future'){
+    allProjects.forEach(p => {
+      const alreadyIn = GANTT_DATA.some(gd => {
+        const pn=(p.ten_cong_trinh||'').replace(/\s+/g,' ').trim().toLowerCase();
+        const gn=gd.n.replace(/\s+/g,' ').trim().toLowerCase();
+        return pn&&(pn.includes(gn.substring(0,25))||gn.includes(pn.substring(0,25)));
+      });
+      if(!alreadyIn && (!ft || p.trang_thai===ft)){
+        extraProjects.push({gi:-1, gd:null, matched:p, ws:'future'});
+      }
+    });
+  }
+
+  const allRows = [...rows, ...extraProjects];
+
+  if(!allRows.length){
+    c.innerHTML='<div class="empty-state" style="padding:40px">Không có dự án phù hợp bộ lọc</div>'; return;
+  }
+
+  const WS_INFO = {
+    done:   {icon:'✅',label:'Hoàn thành',     color:'#6ee7b7'},
+    ok:     {icon:'🟢',label:'Đúng tiến độ',   color:'var(--accent)'},
+    warn:   {icon:'🟡',label:'Sắp đến hạn',    color:'var(--warn)'},
+    over:   {icon:'🔴',label:'Quá hạn',        color:'var(--danger)'},
+    future: {icon:'⚪',label:'Chưa có dữ liệu', color:'rgba(255,255,255,.3)'},
+  };
+
+  const tableRows = allRows.map(({gi, gd, matched, ws}) => {
+    const projName = gd ? gd.n : (matched?.ten_cong_trinh || '');
+    const st = ST[matched?.trang_thai];
+    const nm = projName.length > 55 ? projName.substring(0,55)+'…' : projName;
+    const wd2 = parseInt(document.getElementById('warnDays')?.value||'14');
+
+    // Check live Supabase data for non-GANTT_DATA projects
+    const liveMss = !gd ? getLiveMilestones(projName) : [];
+    const hasLiveData = liveMss.length > 0;
+
+    // Calculate real status and pills for live-data projects
+    let realWs = ws;
+    let phasePills = '';
+
+    if(gd){
+      // GANTT_DATA project: use merged milestones
+      const mergedMs = getMergedMilestones(gd);
+      const groups = [...new Set(mergedMs.map(m=>m.g))];
+      phasePills = groups.map(grp => {
+        const key = getPhaseKey(gi, grp);
+        if(phaseCompletions[key]) return `<span class="g-ms-pill done">✅ ${grp}</span>`;
+        const mss = mergedMs.filter(m=>m.g===grp);
+        const worst = mss.reduce((acc,m) => {
+          const s=getMsStatus(m.d,wd2,false);
+          if(s.cls==='over') return 'over';
+          if(s.cls==='warn'&&acc!=='over') return 'warn';
+          if(s.cls==='ok'&&acc==='future') return 'ok';
+          return acc;
+        },'future');
+        const dotColor = worst==='over'?'var(--danger)':worst==='warn'?'var(--warn)':worst==='ok'?'var(--accent)':'rgba(255,255,255,.25)';
+        return `<span class="g-ms-pill ${worst}"><span style="width:6px;height:6px;border-radius:50%;background:${dotColor};display:inline-block"></span>${grp}</span>`;
+      }).join('');
+    } else if(hasLiveData){
+      // Live Supabase data project: compute status from live milestones
+      const groups = [...new Set(liveMss.map(r=>r.phase))];
+      let worstOverall = 'future';
+      phasePills = groups.map(grp => {
+        const key = projName + '|PHASE|' + grp;
+        if(phaseCompletions[key]) {
+          if(worstOverall==='future') worstOverall='done';
+          return `<span class="g-ms-pill done">✅ ${grp}</span>`;
+        }
+        const mss = liveMss.filter(r=>r.phase===grp);
+        const worst = mss.reduce((acc,m) => {
+          const s=getMsStatus(m.planned_date,wd2,m.is_completed);
+          if(s.cls==='over') return 'over';
+          if(s.cls==='warn'&&acc!=='over') return 'warn';
+          if(s.cls==='ok'&&acc==='future') return 'ok';
+          if(s.cls==='done'&&acc==='future') return 'done';
+          return acc;
+        },'future');
+        if(worst==='over' || worstOverall!=='over') worstOverall = worst;
+        const dotColor = worst==='over'?'var(--danger)':worst==='warn'?'var(--warn)':worst==='ok'?'var(--accent)':worst==='done'?'#6ee7b7':'rgba(255,255,255,.25)';
+        return `<span class="g-ms-pill ${worst}"><span style="width:6px;height:6px;border-radius:50%;background:${dotColor};display:inline-block"></span>${grp}</span>`;
+      }).join('');
+      realWs = worstOverall;
+    }
+
+    const wsi = WS_INFO[realWs] || WS_INFO.future;
+    const mCount = gd ? gd.m.length : liveMss.length;
+    const safeProjName = projName.replace(/'/g,"\\'");
+
+    // Determine onclick: if has GANTT_DATA → gantt modal; if has live data → gantt modal (live); else → add modal
+    let onclickAttr;
+    if(gd){
+      onclickAttr = `onclick="openGanttModal(${gi},'${safeProjName}')"`;
+    } else if(hasLiveData){
+      onclickAttr = `onclick="openGanttModalLive('${safeProjName}')"`;
+    } else {
+      onclickAttr = `onclick="openAddMilestoneModal('${safeProjName}')"`;
+    }
+    return `<tr class="g-list-row" ${onclickAttr}>
+      <td style="width:36px;text-align:center;font-size:16px;vertical-align:middle">${wsi.icon}</td>
+      <td style="vertical-align:middle">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px;line-height:1.4">${nm}</div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          ${st ? `<span class="badge ${st.cls}" style="font-size:10px">${st.label}</span>` : ''}
+          ${matched?.is_cham_tien_do?'<span style="font-size:11px">🚨</span>':''}
+        </div>
+      </td>
+      <td style="min-width:130px;vertical-align:middle">
+        ${(gd || hasLiveData)
+          ? `<span style="font-size:12px;font-weight:600;color:${wsi.color}">${wsi.icon} ${wsi.label}</span>`
+          : '<span style="font-size:11px;color:var(--muted);font-style:italic">Chưa có dữ liệu</span>'}
+      </td>
+      <td style="min-width:260px;vertical-align:middle">
+        ${(gd || hasLiveData)
+          ? `<div style="display:flex;flex-wrap:wrap;gap:2px">${phasePills}</div>`
+          : ''}
+      </td>
+      <td style="text-align:center;font-size:12px;color:var(--muted);white-space:nowrap;vertical-align:middle">${mCount ? mCount+' mốc' : '—'}</td>
+      <td style="text-align:right;padding-right:16px;white-space:nowrap;vertical-align:middle">
+        <button onclick="event.stopPropagation();openAddMilestoneModal('${safeProjName}')" style="font-family:var(--font);font-size:11px;font-weight:700;padding:5px 12px;border-radius:7px;border:1px solid rgba(0,229,176,.35);background:rgba(0,229,176,.1);color:var(--accent2);cursor:pointer;transition:all .15s;white-space:nowrap" onmouseover="this.style.background='rgba(0,229,176,.2)'" onmouseout="this.style.background='rgba(0,229,176,.1)'">＋ Thêm phân kỳ</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  c.innerHTML = `<div style="overflow-x:auto">
+    <table class="g-list-table">
+      <thead>
+        <tr style="border-bottom:2px solid rgba(255,255,255,.08)">
+          <th style="width:36px;padding:10px"></th>
+          <th style="padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:left">Tên công trình</th>
+          <th style="padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:left">Tình trạng</th>
+          <th style="padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:left">Giai đoạn</th>
+          <th style="padding:10px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);text-align:center">Cột mốc</th>
+          <th style="padding:10px 16px;width:160px"></th>
+        </tr>
+      </thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    <div style="padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px solid rgba(255,255,255,.05)">
+      📊 Hiển thị ${allRows.length} dự án · ${rows.length} có dữ liệu phân kỳ từ Excel · Nhấp vào dự án để xem chi tiết
     </div>
-    ${noD.length?'<div style="padding:0 20px 20px">'+noD.map(p=>`<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;display:flex;align-items:center;gap:8px">${ST[p.trang_thai]?`<span class="badge ${ST[p.trang_thai].cls}">${ST[p.trang_thai].label}</span>`:''}<span>${p.ten_cong_trinh}</span></div>`).join('')+'</div>':''}`;
+  </div>`;
+}
+
+// ── OPEN GANTT DETAIL MODAL ──────────────────────────────────
+function openGanttModal(gdIdx, projName){
+  curGmIdx = gdIdx;
+  curGmProjName = null; // This is a GANTT_DATA project
+  const title = (gdIdx >= 0 && GANTT_DATA[gdIdx]) ? GANTT_DATA[gdIdx].n : (projName || '');
+  document.getElementById('gmTitle').textContent = title;
+  document.getElementById('ganttModal').classList.add('open');
+  renderGmDetail();
+}
+
+// Open Gantt modal for a project that only has live Supabase data (not in GANTT_DATA)
+function openGanttModalLive(projName){
+  curGmIdx = -1;
+  curGmProjName = projName; // Store the project name for live-data rendering
+  document.getElementById('gmTitle').textContent = projName;
+  document.getElementById('ganttModal').classList.add('open');
+  renderGmDetail();
+}
+
+function closeGanttModal(){
+  document.getElementById('ganttModal').classList.remove('open');
+  curGmIdx = -1;
+  curGmProjName = null;
+}
+
+function renderGmDetail(){
+  const body = document.getElementById('gmBody');
+
+  // Case 1: Live Supabase-only project (curGmIdx === -1 and curGmProjName set)
+  if(curGmIdx < 0 && curGmProjName){
+    const projName = curGmProjName;
+    const liveMss = getLiveMilestones(projName);
+    if(!liveMss.length){
+      body.innerHTML = `<div class="empty-state" style="padding:40px">
+        <div style="font-size:40px;margin-bottom:12px">📭</div>
+        <div>Chưa có dữ liệu phân kỳ cho dự án này</div>
+        <div style="margin-top:14px;display:flex;gap:8px;justify-content:center">
+          <button class="btn bp" onclick="openAddMilestoneModal('${projName.replace(/'/g,"\\'")}')">＋ Thêm cột mốc phân kỳ</button>
+        </div>
+      </div>`;
+      return;
+    }
+    // Build a virtual gd from live data, sorted by phase then date
+    const sorted = [...liveMss].sort((a,b)=>{
+      if(a.phase !== b.phase) return (a.sort_order||0)-(b.sort_order||0);
+      return new Date(a.planned_date)-new Date(b.planned_date);
+    });
+    const virtualGd = {
+      n: projName,
+      m: sorted.map(r => ({
+        g: r.phase,
+        s: r.sub_phase,
+        d: r.planned_date,
+        id: r.id,
+        is_completed: r.is_completed
+      }))
+    };
+    renderGmDetailWithGd(virtualGd);
     return;
   }
 
-  const allD=withD.flatMap(p=>[new Date(p.ngay_bat_dau),new Date(p.ngay_ket_thuc)]);
-  let minD=new Date(Math.min(...allD)); let maxD=new Date(Math.max(...allD));
-  minD=new Date(minD.getFullYear(),minD.getMonth()-1,1);
-  maxD=new Date(maxD.getFullYear(),maxD.getMonth()+2,0);
-  const totalMs=maxD-minD;
-  const todayPct=Math.max(0,Math.min(100,(Date.now()-minD)/totalMs*100)).toFixed(2);
+  // Case 2: GANTT_DATA project
+  if(curGmIdx >= 0){
+    const gd = GANTT_DATA[curGmIdx] || null;
+    if(!gd){ body.innerHTML=''; return; }
+    renderGmDetailWithGd(gd);
+    return;
+  }
 
-  const months=[]; let cur=new Date(minD);
-  while(cur<=maxD){ months.push(new Date(cur)); cur.setMonth(cur.getMonth()+1); }
-  const mPct=(100/months.length).toFixed(2);
-  const mHdr=months.map(m=>`<div style="flex:0 0 ${mPct}%;text-align:center;font-size:9px;font-weight:700;color:var(--muted);border-right:1px solid var(--border);padding:5px 0;text-transform:uppercase;letter-spacing:.5px">
-    ${m.toLocaleDateString('vi-VN',{month:'short',year:'2-digit'})}
-  </div>`).join('');
+  body.innerHTML='';
+}
+function renderGmDetailWithGd(gd){
+  if(!gd) return;
+  const wd = parseInt(document.getElementById('gmWarnDays')?.value || '14');
+  const body = document.getElementById('gmBody');  // already declared in outer renderGmDetail if needed
 
-  const rows=withD.map(p=>{
-    const s=new Date(p.ngay_bat_dau); const e=new Date(p.ngay_ket_thuc);
-    const l=Math.max(0,(s-minD)/totalMs*100).toFixed(2);
-    const w=Math.max(0.5,(e-s)/totalMs*100).toFixed(2);
-    const col=ST[p.trang_thai]?.color||'#888';
-    const late=p.is_cham_tien_do;
-    const nm=p.ten_cong_trinh.length>45?p.ten_cong_trinh.substring(0,45)+'…':p.ten_cong_trinh;
-    const sStr=s.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'2-digit'});
-    const eStr=e.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'2-digit'});
-    return `<div class="gantt-row" style="display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);min-height:44px" 
-      onmouseover="this.style.background='rgba(0,194,255,.04)'" onmouseout="this.style.background=''">
-      <div style="width:280px;flex-shrink:0;padding:8px 16px;font-size:11px;font-weight:500;border-right:1px solid var(--border);line-height:1.4">
-        ${nm}<div style="margin-top:3px;display:flex;align-items:center;gap:4px">
-          ${ST[p.trang_thai]?`<span class="badge ${ST[p.trang_thai].cls}" style="font-size:8px">${ST[p.trang_thai].label}</span>`:''}
-          ${late?'<span style="font-size:10px">🚨</span>':''}
+  // Use merged milestones (GANTT_DATA + live Supabase overrides)
+  const mergedMs = getMergedMilestones(gd);
+  const groups = {};
+  mergedMs.forEach(m => { if(!groups[m.g]) groups[m.g] = []; groups[m.g].push(m); });
+
+  // Compute timeline range
+  const allDates = mergedMs.map(m => new Date(m.d));
+  let minD = new Date(Math.min(...allDates));
+  let maxD = new Date(Math.max(...allDates));
+  minD = new Date(minD.getFullYear(), minD.getMonth() - 1, 1);
+  maxD = new Date(maxD.getFullYear(), maxD.getMonth() + 2, 0);
+  const totalMs = maxD - minD || 1;
+
+  // Month headers
+  const months = [];
+  let cur = new Date(minD);
+  while(cur <= maxD){ months.push(new Date(cur)); cur.setMonth(cur.getMonth()+1); }
+  const mPct = (100/months.length).toFixed(3);
+  const todayPct = Math.max(0,Math.min(100,(Date.now()-minD)/totalMs*100)).toFixed(2);
+
+  const mHdr = months.map(m => 
+    `<div class="gm-month-cell" style="flex:0 0 ${mPct}%">${m.toLocaleDateString('vi-VN',{month:'short',year:'2-digit'})}</div>`
+  ).join('');
+
+  // Build phase sections
+  const phasesHtml = Object.entries(groups).map(([grp, mss]) => {
+    const pc = PHASE_COLORS[grp] || {bg:'rgba(255,255,255,.05)',border:'rgba(255,255,255,.2)',text:'#fff',dot:'#fff'};
+    const key = getPhaseKey(curGmIdx, grp);
+    const isDone = !!phaseCompletions[key];
+
+    // Sort milestones by date
+    const sorted = [...mss].sort((a,b)=>new Date(a.d)-new Date(b.d));
+
+    // Cards
+    const cards = sorted.map(m => {
+      const s = getMsStatus(m.d, wd, isDone);
+      const dStr = new Date(m.d).toLocaleDateString('vi-VN', {day:'2-digit',month:'2-digit',year:'numeric'});
+      const colors = {
+        done:  {bg:'rgba(110,231,183,.1)',  border:'rgba(110,231,183,.3)', badge:'#6ee7b7', badgeBg:'rgba(110,231,183,.15)'},
+        ok:    {bg:'rgba(0,194,255,.08)',   border:'rgba(0,194,255,.2)',   badge:'#00c2ff', badgeBg:'rgba(0,194,255,.1)'},
+        warn:  {bg:'rgba(255,179,71,.1)',   border:'rgba(255,179,71,.3)',  badge:'var(--warn)', badgeBg:'rgba(255,179,71,.15)'},
+        over:  {bg:'rgba(255,79,79,.1)',    border:'rgba(255,79,79,.3)',   badge:'var(--danger)', badgeBg:'rgba(255,79,79,.15)'},
+        future:{bg:'rgba(255,255,255,.03)', border:'rgba(255,255,255,.08)',badge:'#5f8aaa', badgeBg:'rgba(255,255,255,.05)'},
+      };
+      const c2 = {done:{bg:'rgba(110,231,183,.1)',border:'rgba(110,231,183,.3)',badge:'#6ee7b7'},
+        ok:{bg:'rgba(0,194,255,.08)',border:'rgba(0,194,255,.2)',badge:'#00c2ff'},
+        warn:{bg:'rgba(255,179,71,.1)',border:'rgba(255,179,71,.3)',badge:'var(--warn)'},
+        over:{bg:'rgba(255,79,79,.1)',border:'rgba(255,79,79,.3)',badge:'var(--danger)'},
+        future:{bg:'rgba(255,255,255,.03)',border:'rgba(255,255,255,.08)',badge:'#5f8aaa'}};
+      const cc = c2[s.cls] || c2.future;
+      const msId = m.id || null;
+      const safeMsName = m.s.replace(/'/g,"\\'");
+      const safeGrpForCard = grp.replace(/'/g,"\\'");
+      const safeProjForCard = gd.n.replace(/'/g,"\\'");
+      return `<div class="gm-ms-card" style="background:${cc.bg};border-color:${cc.border};position:relative">
+        <button onclick="deleteMilestone('${safeProjForCard}','${safeGrpForCard}','${safeMsName}','${msId||''}',event)"
+          style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,79,79,.4);background:rgba(255,79,79,.1);color:var(--danger);font-size:10px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font);font-weight:700;transition:all .15s;z-index:10"
+          onmouseover="this.style.background='rgba(255,79,79,.3)'" onmouseout="this.style.background='rgba(255,79,79,.1)'"
+          title="Xóa cột mốc này">×</button>
+        <div class="ms-name" style="color:${pc.text};cursor:pointer;padding-right:18px"
+          onclick="openMilestoneEdit('${safeProjForCard}','${safeGrpForCard}','${safeMsName}','${m.d}','${msId||''}',event)"
+          title="Nhấp để chỉnh sửa ngày">${m.s} <span style="font-size:9px;opacity:.5">✏️</span></div>
+        <div class="ms-date" style="color:var(--muted);font-family:var(--mono)">${dStr}</div>
+        <span class="ms-status" style="background:${cc.bg};color:${cc.badge};border:1px solid ${cc.border}">${s.label}</span>
+      </div>`;
+    }).join('');
+
+    // Timeline bar for this phase
+    const firstD = new Date(sorted[0].d);
+    const lastD = new Date(sorted[sorted.length-1].d);
+    const barL = Math.max(0,(firstD-minD)/totalMs*100).toFixed(2);
+    const barW = Math.max(0.3,(lastD-firstD)/totalMs*100).toFixed(2);
+    const dotHtml = sorted.map(m => {
+      const s = getMsStatus(m.d, wd, isDone);
+      const pct = Math.max(0,Math.min(100,(new Date(m.d)-minD)/totalMs*100)).toFixed(2);
+      const dotC = {done:'#6ee7b7',ok:'var(--accent)',warn:'var(--warn)',over:'var(--danger)',future:'rgba(255,255,255,.25)'}[s.cls];
+      return `<div style="position:absolute;left:${pct}%;top:50%;transform:translate(-50%,-50%);z-index:5"
+        title="${m.s}: ${new Date(m.d).toLocaleDateString('vi-VN')} | ${s.label}">
+        <div style="width:11px;height:11px;border-radius:50%;background:${dotC};border:2px solid rgba(0,0,0,.4);${s.cls==='warn'||s.cls==='over'?'animation:pulse 1.2s infinite':''}"></div>
+      </div>`;
+    }).join('');
+
+    const safeGrp = grp.replace(/'/g,"\\'");
+    const safeProjName = gd.n.replace(/'/g,"\\'");
+    const doneBtn = `<button class="gm-done-btn ${isDone?'marked':''}" onclick="togglePhaseDoneWithSave('${safeProjName}',${curGmIdx},'${safeGrp}')" title="Đánh dấu toàn bộ giai đoạn này đã hoàn thành">
+      ${isDone?'✅ Đã hoàn thành':'☑ Đánh dấu hoàn thành'}
+    </button>`;
+
+    return `<div class="gm-phase-section">
+      <div class="gm-phase-hdr" style="background:${pc.bg};border-bottom-color:${pc.border}">
+        <span style="width:10px;height:10px;border-radius:50%;background:${pc.dot};display:inline-block;flex-shrink:0"></span>
+        <h3 style="color:${pc.text}">${grp}</h3>
+        <span style="font-size:11px;color:var(--muted)">${sorted.length} cột mốc · ${new Date(sorted[0].d).toLocaleDateString('vi-VN')} → ${new Date(sorted[sorted.length-1].d).toLocaleDateString('vi-VN')}</span>
+        ${doneBtn}
+      </div>
+      <!-- Timeline bar -->
+      <div style="padding:6px 16px 2px;background:rgba(0,0,0,.15)">
+        <div class="gm-timeline-inner">
+          <div class="gm-month-hdr">${mHdr}</div>
+          <div style="position:relative;height:36px">
+            <div style="position:absolute;left:${todayPct}%;top:0;bottom:0;width:1.5px;background:rgba(255,79,79,.6);z-index:20">
+              <div style="position:absolute;top:2px;left:3px;font-size:8px;font-weight:700;color:var(--danger);white-space:nowrap">Hôm nay</div>
+            </div>
+            <div style="position:absolute;left:${barL}%;width:${barW}%;top:50%;transform:translateY(-50%);height:4px;background:${pc.dot};opacity:${isDone?.9:.4};border-radius:2px;min-width:6px"></div>
+            ${dotHtml}
+          </div>
         </div>
       </div>
-      <div style="flex:1;position:relative;height:44px">
-        <div title="${p.ten_cong_trinh} | ${sStr} → ${eStr}" style="position:absolute;left:${l}%;width:${w}%;top:50%;transform:translateY(-50%);height:26px;
-          background:${col};border-radius:4px;opacity:${late?.5:.75};cursor:pointer;display:flex;align-items:center;
-          justify-content:center;font-size:9px;font-weight:700;color:#000;overflow:hidden;padding:0 6px;
-          ${late?`background:repeating-linear-gradient(45deg,${col},${col} 4px,rgba(255,79,79,.5) 4px,rgba(255,79,79,.5) 8px)`:''}"
-          onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='${late?.5:.75}'"
-          onclick="openDetail('${p.id}')">
-          ${sStr}
-        </div>
-      </div>
+      <!-- Milestone cards -->
+      <div class="gm-milestones">${cards}</div>
     </div>`;
   }).join('');
 
-  c.innerHTML=`<div style="overflow-x:auto"><div style="min-width:900px">
-    <div style="display:flex;border-bottom:1px solid var(--border)">
-      <div style="width:280px;flex-shrink:0;padding:8px 16px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border)">Tên công trình</div>
-      <div style="flex:1;display:flex">${mHdr}</div>
-    </div>
-    <div style="position:relative">
-      <div style="position:absolute;left:calc(280px + ${todayPct}% * (100% - 280px) / 100);top:0;bottom:0;width:1px;background:rgba(255,79,79,.7);z-index:10;pointer-events:none">
-        <div style="position:absolute;top:2px;left:3px;font-size:8px;font-weight:700;color:var(--danger);white-space:nowrap">Hôm nay</div>
-      </div>
-      ${rows}
-    </div>
-    ${noD.length?`<div style="padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)">⚠️ ${noD.length} dự án chưa nhập ngày</div>`:''}
-  </div></div>`;
+  body.innerHTML = phasesHtml || '<div class="empty-state">Không có dữ liệu phân kỳ</div>';
 }
+
+function togglePhaseDone(gdIdx, grp, btn){
+  const key = getPhaseKey(gdIdx, grp);
+  phaseCompletions[key] = !phaseCompletions[key];
+  renderGmDetail();
+  renderGantt(); // update list view too
+}
+
+// ── ALERT TABLE MODAL ──────────────────────────────────────────
+let alertModalTab = 'over';
+function openAlertTable(){
+  const over = lastAlerts.filter(a=>a.status.cls==='over');
+  const warn = lastAlerts.filter(a=>a.status.cls==='warn');
+  document.getElementById('amOverCount').textContent = '('+over.length+')';
+  document.getElementById('amWarnCount').textContent = '('+warn.length+')';
+  alertModalTab = 'over';
+  document.querySelectorAll('.am-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  renderAmTable('over');
+  document.getElementById('alertModal').classList.add('open');
+}
+
+function closeAlertModal(){
+  document.getElementById('alertModal').classList.remove('open');
+}
+
+function switchAmTab(tab, btn){
+  alertModalTab = tab;
+  document.querySelectorAll('.am-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderAmTable(tab);
+}
+
+function renderAmTable(tab){
+  const filtered = tab==='all' ? lastAlerts : lastAlerts.filter(a=>a.status.cls===tab);
+  const el = document.getElementById('amContent');
+  if(!filtered.length){
+    el.innerHTML = '<div class="empty-state" style="padding:32px">Không có dữ liệu</div>'; return;
+  }
+  const rows = filtered.map(a => {
+    const dStr = new Date(a.date).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+    const nm = a.projectName.length>60 ? a.projectName.substring(0,60)+'…' : a.projectName;
+    const badge = `<span class="am-badge ${a.status.cls}">${a.status.label}</span>`;
+    const phaseColor = PHASE_COLORS[a.phase] || {text:'#fff'};
+    return `<tr onclick="openGanttModal(${a.gdIdx})" style="cursor:pointer" title="Click để xem chi tiết Gantt dự án này">
+      <td style="max-width:300px;font-size:12px;font-weight:500;line-height:1.4">${nm}</td>
+      <td><span class="g-phase-tag" style="color:${phaseColor.text}">${a.phase}</span></td>
+      <td style="font-size:12px;color:var(--muted)">${a.sub}</td>
+      <td style="font-family:var(--mono);font-size:11px">${dStr}</td>
+      <td>${badge}</td>
+    </tr>`;
+  }).join('');
+
+  el.innerHTML = `<div style="margin-bottom:10px;font-size:12px;color:var(--muted)">${filtered.length} cột mốc · Click vào hàng để xem chi tiết Gantt</div>
+  <table class="am-table">
+    <thead><tr>
+      <th>Tên công trình</th>
+      <th>Giai đoạn</th>
+      <th>Cột mốc</th>
+      <th>Ngày KH</th>
+      <th>Trạng thái</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+// ── SEND ALERTS WEBHOOK ───────────────────────────────────────
+async function checkAndSendAlerts(){
+  const wd = parseInt(document.getElementById('warnDays')?.value || '14');
+  renderGantt(); // recompute lastAlerts
+  setTimeout(async () => {
+    if(!lastAlerts.length){
+      toast('✅ Không có cột mốc nào cần cảnh báo trong '+wd+' ngày','ok'); return;
+    }
+    const wh = WH5 && !WH5.includes('your-n8n') ? WH5 : null;
+    if(!wh){
+      openAlertTable();
+      toast('⚠️ Chưa cấu hình WH5. Hiển thị bảng cảnh báo cục bộ. '+lastAlerts.length+' mục.','warn');
+      return;
+    }
+    try{
+      toast('📡 Đang gửi '+lastAlerts.length+' cảnh báo đến N8N…','ok');
+      const res = await fetch(wh, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          type:'milestone_alert', warnDays:wd,
+          totalAlerts:lastAlerts.length,
+          overdueCount:lastAlerts.filter(a=>a.status.cls==='over').length,
+          warningCount:lastAlerts.filter(a=>a.status.cls==='warn').length,
+          alerts:lastAlerts.map(a=>({projectName:a.projectName,phase:a.phase,subPhase:a.sub,plannedDate:a.date,daysLeft:a.status.diff,status:a.status.cls==='over'?'OVERDUE':'WARNING'})),
+          sentAt:new Date().toISOString()
+        })
+      });
+      if(res.ok) toast('✅ Đã gửi '+lastAlerts.length+' cảnh báo qua Email + Zalo','ok');
+      else toast('❌ Webhook lỗi: '+res.status,'err');
+    }catch(e){ toast('❌ Lỗi: '+e.message,'err'); }
+  }, 100);
+}
+
 
 // ─── ACTIVITY LOG ─────────────────────────────────────────────────
 async function loadLog(){

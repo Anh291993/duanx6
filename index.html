@@ -841,6 +841,23 @@ textarea.fc{resize:vertical;min-height:80px}
   </div>
 </div>
 
+<!-- ═══ MODAL: Sửa Phụ trách & Phối hợp (lanh_dao only) ═══ -->
+<div class="overlay" id="mEditStaff">
+  <div class="modal" style="max-width:420px">
+    <div class="mh"><span style="font-size:18px">👤</span><h3>Cập nhật Phụ trách &amp; Phối hợp</h3><button class="mclose" onclick="closeM('mEditStaff')">×</button></div>
+    <div class="mb">
+      <div style="margin-bottom:10px;font-size:12px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border-left:3px solid var(--accent)" id="esTitle"></div>
+      <div><label class="fl">Lãnh đạo phụ trách</label><input id="esLD" class="fc" placeholder="VD: Thọ, Thiện"/></div>
+      <div><label class="fl">Chuyên viên thực hiện</label><input id="esCV" class="fc" placeholder="VD: Tuấn Đạt"/></div>
+      <div><label class="fl">Đơn vị phối hợp</label><input id="esPH" class="fc" placeholder="VD: Ngân P8"/></div>
+    </div>
+    <div class="mf">
+      <button class="btn bg" onclick="closeM('mEditStaff')">Hủy</button>
+      <button class="btn bp" onclick="submitEditStaff()">💾 Lưu thay đổi</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ MODAL: Flag dự án (WH2) ═══ -->
 <div class="overlay" id="mFlag">
   <div class="modal" style="max-width:460px">
@@ -1301,8 +1318,12 @@ function renderTable(data){
   const tb=document.getElementById('tBody');
   document.getElementById('tableCount').textContent=data.length+' dự án';
   if(!data.length){ tb.innerHTML='<tr><td colspan="9" class="empty-state">Không có dữ liệu phù hợp</td></tr>'; return; }
+  const isLD = (currentUser?.email||'').includes('lanh_dao');
   tb.innerHTML=data.map((p,i)=>{
     const st=ST[p.trang_thai];
+    const editBtn = isLD
+      ? `<button class="ra" style="font-size:10px;padding:2px 6px;margin-left:4px;opacity:.6" onclick="openEditStaff('${p.id}')" title="Sửa phụ trách & phối hợp">🖊</button>`
+      : '';
     return `<tr class="${p.is_cham_tien_do?'rl':''}" style="animation:fadeUp .3s ease ${(i%15)*.025}s both">
       <td style="color:var(--muted);font-family:var(--mono);font-size:10px">${p.stt??i+1}</td>
       <td class="td-name">${p.ten_cong_trinh}</td>
@@ -1314,11 +1335,19 @@ function renderTable(data){
         ${p.is_cham_tien_do?'<div style="font-size:11px;color:var(--danger);margin-top:2px">🚨 Chậm tiến độ</div>':''}
       </td>
       <td style="font-size:11px;color:var(--text)">
-        ${p.lanh_dao?`<div style="font-weight:500">${p.lanh_dao}</div>`:''}
-        ${p.chuyen_vien?`<div style="color:var(--muted);margin-top:2px">${p.chuyen_vien}</div>`:''}
+        <div style="display:flex;align-items:flex-start;gap:2px">
+          <div>
+            ${p.lanh_dao?`<div style="font-weight:500">${p.lanh_dao}</div>`:'<span style="color:rgba(255,255,255,.25);font-style:italic">Chưa có</span>'}
+            ${p.chuyen_vien?`<div style="color:var(--muted);margin-top:2px">${p.chuyen_vien}</div>`:''}
+          </div>
+          ${editBtn}
+        </div>
       </td>
       <td style="font-size:11px;color:var(--muted)">
-        ${p.phoi_hop?`<div style="line-height:1.5">${p.phoi_hop}</div>`:'<span style="color:rgba(255,255,255,.15)">—</span>'}
+        <div style="display:flex;align-items:flex-start;gap:2px">
+          <div>${p.phoi_hop?`<div style="line-height:1.5">${p.phoi_hop}</div>`:'<span style="color:rgba(255,255,255,.15)">—</span>'}</div>
+          ${editBtn}
+        </div>
       </td>
       <td><div style="display:flex;gap:4px;flex-wrap:wrap">
         <button class="ra" onclick="openDetail('${p.id}')">📁</button>
@@ -2637,6 +2666,43 @@ async function submitFlag(){
 }
 
 // ─── POPULATE SELECTS ─────────────────────────────────────────────
+// ─── EDIT PHỤ TRÁCH & PHỐI HỢP (lanh_dao only) ───────────────────
+let esProjectId = null;
+function openEditStaff(id){
+  const p = allProjects.find(x=>x.id===id);
+  if(!p) return;
+  esProjectId = id;
+  document.getElementById('esTitle').textContent = `${p.stt??''}. ${p.ten_cong_trinh}`;
+  document.getElementById('esLD').value = p.lanh_dao || '';
+  document.getElementById('esCV').value = p.chuyen_vien || '';
+  document.getElementById('esPH').value = p.phoi_hop || '';
+  openM('mEditStaff');
+}
+async function submitEditStaff(){
+  if(!esProjectId) return;
+  const ld = document.getElementById('esLD').value.trim();
+  const cv = document.getElementById('esCV').value.trim();
+  const ph = document.getElementById('esPH').value.trim();
+  try{
+    const { error } = await db.from('projects').update({
+      lanh_dao:  ld || null,
+      chuyen_vien: cv || null,
+      phoi_hop:  ph || null,
+      updated_at: new Date().toISOString()
+    }).eq('id', esProjectId);
+    if(error) throw error;
+    // Cập nhật dữ liệu local ngay lập tức
+    const idx = allProjects.findIndex(x=>x.id===esProjectId);
+    if(idx>=0){ allProjects[idx].lanh_dao=ld||null; allProjects[idx].chuyen_vien=cv||null; allProjects[idx].phoi_hop=ph||null; }
+    const fi = filteredProjects.findIndex(x=>x.id===esProjectId);
+    if(fi>=0){ filteredProjects[fi].lanh_dao=ld||null; filteredProjects[fi].chuyen_vien=cv||null; filteredProjects[fi].phoi_hop=ph||null; }
+    renderTable(filteredProjects.length ? filteredProjects : allProjects);
+    populateCVFilter(allProjects);
+    toast('✅ Cập nhật phụ trách & phối hợp thành công!','ok');
+    closeM('mEditStaff');
+  } catch(e){ toast('❌ Lỗi: '+e.message,'err'); }
+}
+
 function populateSel(data){
   const opts='<option value="">– Chọn dự án –</option>'+
     data.map(p=>`<option value="${p.id}">${p.stt??'?'}. ${p.ten_cong_trinh.substring(0,60)}…</option>`).join('');
@@ -2970,12 +3036,16 @@ const WH_CHAT = 'https://n8nhome.chatpro.io.vn/webhook/chat_qlda'; // ← đổi
 let chatOpen = false;
 let chatHistory = []; // [{role:'user'|'assistant', content:''}]
 let chatWaiting = false;
+let chatGreeted = false; // chỉ chào 1 lần duy nhất
 
 function toggleChat(){
   chatOpen = !chatOpen;
   document.getElementById('chatWindow').classList.toggle('open', chatOpen);
   if(chatOpen){
-    if(chatHistory.length === 0) addBotMsg('Xin chào! Tôi có thể trả lời câu hỏi về tiến độ dự án, cột mốc, vướng mắc... Bạn muốn hỏi gì?');
+    if(!chatGreeted){
+      addBotMsg('Xin chào! Tôi có thể trả lời câu hỏi về tiến độ dự án, cột mốc, vướng mắc... Bạn muốn hỏi gì?');
+      chatGreeted = true;
+    }
     setTimeout(()=>document.getElementById('chatInput').focus(), 200);
     pingChatWebhook();
   }
